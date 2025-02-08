@@ -1,170 +1,90 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const IBSoftPhone());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class IBSoftPhone extends StatelessWidget {
+  const IBSoftPhone({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Input Example',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen(),
+      home: DialPad(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class DialPad extends StatelessWidget {
+  const DialPad({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Screen')),
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade900,
+        title: Text(
+          "iBrowse Soft phone",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const InputScreen()),
-                );
-              },
-              child: const Text('Go to Input Screen'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const FormScreen()),
-                );
-              },
-              child: const Text('Go to Form Screen'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class InputScreen extends StatefulWidget {
-  const InputScreen({super.key});
-
-  @override
-  State<InputScreen> createState() => _InputScreenState();
-}
-
-class _InputScreenState extends State<InputScreen> {
-  final TextEditingController _controller = TextEditingController();
-  String displayedText = '';
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('User Input Example')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                  labelText: 'Enter something', border: OutlineInputBorder()),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  displayedText = _controller.text;
-                });
-              },
-              child: const Text('Submit'),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'You entered: $displayedText',
-              style: const TextStyle(fontSize: 18),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
-
-  @override
-  State<FormScreen> createState() => _FormScreenState();
-}
-
-class _FormScreenState extends State<FormScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Form Validation')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Enter your email',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Email cannot be empty!';
-                  }
-                  if (!value.contains('@')) {
-                    return 'Enter a valid email!';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text('Submitted: ${_emailController.text}')),
-                    );
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ],
-          ),
+          child: Container(
+              padding: const EdgeInsets.fromLTRB(4.0, 34.0, 4.0, 4.0),
+              margin: const EdgeInsets.fromLTRB(0, 180, 0, 0),
+              child: Column(
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        FilledButton(
+                            onPressed: () {},
+                            child: const Text('1')),
+                        FilledButton(onPressed: () {}, child: const Text('2')),
+                        FilledButton(onPressed: () {}, child: const Text('3')),
+                      ]
+                  ),
+                  SizedBox(height: 40),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        FilledButton(onPressed: () {}, child: const Text('4')),
+                        FilledButton(onPressed: () {}, child: const Text('5')),
+                        FilledButton(onPressed: () {}, child: const Text('6')),
+                      ]
+                  ),
+                  SizedBox(height: 40),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        FilledButton(onPressed: () {}, child: const Text('7')),
+                        FilledButton(onPressed: () {}, child: const Text('8')),
+                        FilledButton(onPressed: () {}, child: const Text('9')),
+                      ]
+                  ),
+                  SizedBox(height: 40),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        FilledButton(onPressed: () {}, child: const Text('*')),
+                        FilledButton(onPressed: () {}, child: const Text('0')),
+                        FilledButton(onPressed: () {}, child: const Text('#')),
+                      ]
+                  )
+                ],
+              ))),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue.shade900,
+        onPressed: () {
+          print("pressed");
+        },
+        child: Text(
+          "Call",
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
